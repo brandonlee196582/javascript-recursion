@@ -27,13 +27,27 @@ var countUp = count => {
 console.log(countUp(5));
 
 
-//Write a function that generates every possible sequence of
-//throws a single player could throw over a game of
-//rock-paper-scissors based on the number of rounds passed
-//into the function.
+//Rock Paper Scissors Possibilities
+const rockPaperScissors = (numberOfThrows) => {
+    const result = [];
+    const choices = ['rock', 'paper', 'scissors'];
 
-var rockPaperScissors = rounds => {
+    const recurse = (currentPlay) => {
+        if (currentPlay.length === numberOfThrows) {
+            result.push(currentPlay);
+            return;
+        }
+    
+        for (let i =0; i< choices.length; i += 1) {
+            const currentChoice = [choices[i]];
+            const nextPlay = currentPlay.concat(currentChoice);
+            recurse(nextPlay);
+        }
+    };
 
+    recurse ([]);
+
+    return result;
 };
 
-console.log(rockPaperScissors(3));
+console.log(rockPaperScissors(2));
